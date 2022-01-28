@@ -1,0 +1,32 @@
+type Specialty {
+  id: Int!
+  name: String!
+  doctors: [Doctor!]
+}
+
+type Doctor {
+  id: Int!
+  name: String!
+  crm: String!
+  specialties: [Specialty!] 
+}
+
+input CreateSpecialtyInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdateSpecialtyInput {
+  id: Int!
+}
+
+type Query {
+  specialties: [Specialty]!
+  specialty(id: Int!): Specialty
+}
+
+type Mutation {
+  createSpecialty(createSpecialtyInput: CreateSpecialtyInput!): Specialty!
+  updateSpecialty(updateSpecialtyInput: UpdateSpecialtyInput!): Specialty!
+  removeSpecialty(id: Int!): Specialty
+}
