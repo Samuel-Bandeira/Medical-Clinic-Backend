@@ -1,0 +1,46 @@
+type Doctor {
+  id: Int!
+  name: String!
+  crm: String!
+  specialties: [Specialty!]
+}
+
+type Specialty {
+  id: Int!
+  name: String!
+  doctors: [Doctor!]
+}
+
+input CreateDoctorInput {
+  name: String!
+  crm: String!
+  specialtiesIds: [Int!]!
+}
+
+input Data {
+  name: String
+  crm: String
+  specialties: [Int]
+}
+
+input Where {
+  id: Int
+}
+
+input UpdateDoctorInput {
+  doctorId: Int
+  specialtiesIds: [Int]
+  data: Data
+  opType: String
+}
+
+type Query {
+  doctors: [Doctor]!
+  doctor(id: Int!): Doctor
+}
+
+type Mutation {
+  createDoctor(createDoctorInput: CreateDoctorInput!): Doctor!
+  updateDoctor(updateDoctorInput: UpdateDoctorInput!): Doctor!
+  removeDoctor(id: Int!): Doctor
+}

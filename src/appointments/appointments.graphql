@@ -1,0 +1,30 @@
+scalar Date
+
+type MyType {
+  created: Date
+}
+
+type Appointment {
+  # Example field (placeholder)
+  doctorId: Int
+}
+
+input CreateAppointmentInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdateAppointmentInput {
+  id: Int!
+}
+
+type Query {
+  appointments: [Appointment]!
+  appointment(id: Int!): Appointment
+}
+
+type Mutation {
+  createAppointment(createAppointmentInput: CreateAppointmentInput!): Appointment!
+  updateAppointment(updateAppointmentInput: UpdateAppointmentInput!): Appointment!
+  removeAppointment(id: Int!): Appointment
+}

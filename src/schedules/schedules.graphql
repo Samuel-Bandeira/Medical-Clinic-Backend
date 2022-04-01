@@ -1,0 +1,32 @@
+type Schedule {
+  # Example field (placeholder)
+  startHour: Date
+  endHour: Date
+  doctorId: Int
+}
+
+input Data {
+  startHour: Date
+  endHour: Date
+  doctor: [Int!]
+}
+
+input CreateScheduleInput {
+  doctorId: Int
+  data: Data
+}
+
+input UpdateScheduleInput {
+  id: Int!
+}
+
+type Query {
+  schedules: [Schedule]!
+  schedule(id: Int!): Schedule
+}
+
+type Mutation {
+  createSchedule(createScheduleInput: CreateScheduleInput!): Schedule!
+  updateSchedule(updateScheduleInput: UpdateScheduleInput!): Schedule!
+  removeSchedule(id: Int!): Schedule
+}

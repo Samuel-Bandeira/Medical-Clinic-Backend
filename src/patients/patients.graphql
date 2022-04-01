@@ -1,0 +1,24 @@
+type Patient {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input CreatePatientInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdatePatientInput {
+  id: Int!
+}
+
+type Query {
+  patients: [Patient]!
+  patient(id: Int!): Patient
+}
+
+type Mutation {
+  createPatient(createPatientInput: CreatePatientInput!): Patient!
+  updatePatient(updatePatientInput: UpdatePatientInput!): Patient!
+  removePatient(id: Int!): Patient
+}

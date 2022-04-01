@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { SpecialtiesService } from './specialties.service';
-import { CreateSpecialtyInput } from './dto/create-specialty.input';
-import { UpdateSpecialtyInput } from './dto/update-specialty.input';
+import { Prisma } from '@prisma/client';
+import { UpdateSpecialtyInput } from 'src/graphql';
 
 @Resolver('Specialty')
 export class SpecialtiesResolver {
@@ -9,7 +9,7 @@ export class SpecialtiesResolver {
 
   @Mutation('createSpecialty')
   create(
-    @Args('createSpecialtyInput') createSpecialtyInput: CreateSpecialtyInput,
+    @Args('createSpecialtyInput') createSpecialtyInput: Prisma.SpecialtyCreateInput,
   ) {
     return this.specialtiesService.create(createSpecialtyInput);
   }
@@ -26,16 +26,25 @@ export class SpecialtiesResolver {
 
   @Mutation('updateSpecialty')
   update(
-    @Args('updateSpecialtyInput') updateSpecialtyInput: UpdateSpecialtyInput,
+    @Args('updateSpecialtyInput') UpdateSpecialtyInput : Prisma.SpecialtyUpdateArgs
   ) {
-    return this.specialtiesService.update(
-      updateSpecialtyInput.id,
-      updateSpecialtyInput,
-    );
+    return this.specialtiesService.update(UpdateSpecialtyInput)
   }
 
   @Mutation('removeSpecialty')
   remove(@Args('id') id: number) {
-    return this.specialtiesService.remove(id);
+    return this.specialtiesService.remove({ id });
   }
 }
+
+
+/* 
+depois tentar implementar no . update:
+{
+  where: dto.id,
+  data: {
+    name: dto.name,
+    doctors: dto.doctors
+  }
+}
+*/

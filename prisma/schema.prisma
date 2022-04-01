@@ -11,14 +11,40 @@ datasource db {
 }
 
 model Specialty {
-  id Int @id @default(autoincrement())
-  name String
+  id      Int      @id @default(autoincrement())
+  name    String
   doctors Doctor[]
 }
 
 model Doctor {
-  id Int @id @default(autoincrement())
-  name String
-  crm String
-  specialties Specialty[]  
+  id          Int           @id @default(autoincrement())
+  name        String
+  crm         String
+  specialties Specialty[]
+  Schedule    Schedule[]
+  Appointment Appointment[]
+}
+
+model Schedule {
+  id        Int      @id @default(autoincrement())
+  doctor    Doctor   @relation(fields: [doctorId], references: [id])
+  doctorId  Int
+  startHour DateTime
+  endHour   DateTime
+}
+
+model Patient {
+  id          Int           @id @default(autoincrement())
+  name        String
+  Appointment Appointment[]
+}
+
+model Appointment {
+  id        Int      @id @default(autoincrement())
+  doctor    Doctor   @relation(fields: [doctorId], references: [id])
+  patient   Patient  @relation(fields: [patientId], references: [id])
+  doctorId  Int
+  patientId Int
+  startHour DateTime
+  endHour   DateTime
 }

@@ -8,16 +8,26 @@ type Doctor {
   id: Int!
   name: String!
   crm: String!
-  specialties: [Specialty!] 
+  specialties: [Specialty!]
 }
 
 input CreateSpecialtyInput {
-  # Example field (placeholder)
-  exampleField: Int
+  name: String!
+  doctors: [String!]
+}
+
+input Data {
+  name: String
+  doctors: [String]
+}
+
+input Where {
+  id: Int
 }
 
 input UpdateSpecialtyInput {
-  id: Int!
+  where: Where
+  data: Data
 }
 
 type Query {
